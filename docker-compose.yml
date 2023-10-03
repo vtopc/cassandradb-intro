@@ -1,0 +1,32 @@
+version: "3.9"
+
+services:
+  cassandra:
+    image: cassandra:4.0
+    networks:
+      - cassandra
+    ports:
+      - "9042:9042"
+    volumes:
+      - cassandra:/var/lib/cassandra
+    environment:
+      - CASSANDRA_CLUSTER_NAME=cassandradb-intro
+
+volumes:
+  cassandra:
+
+networks:
+  cassandra:
+
+#  mongodb:
+#    image: mongo:4
+#    restart: unless-stopped
+#    ports:
+#      - "27017:27017"
+#    environment:
+#      MONGO_INITDB_DATABASE: mg_staging
+#    volumes:
+#      - mongo:/data/db
+#
+#volumes:
+#  mongo:
