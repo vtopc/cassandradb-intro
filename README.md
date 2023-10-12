@@ -25,26 +25,6 @@ CassandraDB - Distributed DB
 - Кожна таблиця зберігається в своєму окремому файлі, тому повʼязанні данні мають знаходитися в одній таблиці.
 - Денормалізація.
 
-## Переваги
-
-- CassandraDB - відкрите програмне забезпечення(Open Source).
-- Висока доступність(High availability) без простоїв.
-- Нема мастер ноди. There is no single point of failure.
-- Автоматична реплікація і реплікація між дата центрами.
-- Горизонтальне масштабування.
-- Додавання партішинів(нод) однією командою.
-- Карти, кортежи і JSON в полях.
-- Час життя(TTL) для записів.
-
-## Недоліки
-
-- AP база по CAP теоремі. Кінцева консистенція (Eventual Consistency). Читання данних не гарантує повернення останніх змін.
-- Надгробки(Tombstones): limit - 100K cells.
-- Незмінний ключ розбиття(Partition Key).
-- Індекси https://docs.datastax.com/en/cql-oss/3.3/cql/cql_using/useWhenIndex.html#Whennottouseanindex
-- Матеріалізовані Представлення(Materialized Views) в беті.
-- JAVA(використання памяті, збирання сміття)
-
 ## Обмеження
 
 - Максимальний кількість партішинів(нодів) в теорії не обмежена. Netflix має приблизно 1000 нод.
@@ -112,6 +92,26 @@ https://en.wikipedia.org/wiki/Tombstone_(data_store)
 Cassandra stores tombstones in the index until the tombstone limit reaches 100K cells. After exceeding the tombstone limit, the query that uses the indexed value will fail.
 - TTL
 - Не використовувати як чергу.
+
+## Переваги
+
+- CassandraDB - відкрите програмне забезпечення(Open Source).
+- Висока доступність(High availability) без простоїв.
+- Нема мастер ноди. There is no single point of failure.
+- Автоматична реплікація і реплікація між дата центрами.
+- Горизонтальне масштабування.
+- Додавання партішинів(нод) однією командою.
+- Карти, кортежи і JSON в полях.
+- Час життя(TTL) для записів.
+
+## Недоліки
+
+- AP база по CAP теоремі. Кінцева консистенція (Eventual Consistency). Читання данних не гарантує повернення останніх змін.
+- Надгробки(Tombstones): limit - 100K cells.
+- Незмінний ключ розбиття(Partition Key).
+- Індекси https://docs.datastax.com/en/cql-oss/3.3/cql/cql_using/useWhenIndex.html#Whennottouseanindex
+- Матеріалізовані Представлення(Materialized Views) в беті.
+- JAVA(використання памяті, збирання сміття)
 
 ## Альтернативи
 - Amazon DynamoDB.
