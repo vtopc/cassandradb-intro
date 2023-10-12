@@ -2,9 +2,9 @@
 
 CassandraDB - Distributed DB
 
-CQL(Cassandra Query Language) - мова запитів, альтернатива класичній SQL.
+Використовує CQL(Cassandra Query Language) - мова запитів, альтернатива класичній SQL.
 
-Написана JAVA, але є альтернатива ScyllaDB, написана на C++.
+Написана на JAVA - https://github.com/apache/cassandra.
 
 ## Структура
 ### Ноди(партішини)
@@ -34,6 +34,7 @@ CQL(Cassandra Query Language) - мова запитів, альтернатив�
 - Горизонтальне масштабування.
 - Додавання партішинів(нод) однією командою.
 - Карти, кортежи і JSON в полях.
+- Час життя(TTL) для записів.
 
 ## Недоліки
 
@@ -92,15 +93,32 @@ Cassandra is typically classified as an AP system, meaning that availability and
 
 ### Створення таблиці
 
-#### Матеріалізоване Представлення(Materialized Views)
 
 ### Вставка данних
 
+### Вторинний індекс(secondary-index)
+
+#### LIKE
+
+https://github.com/apache/cassandra/blob/trunk/doc/SASI.md
+
+### Матеріалізоване представлення(Materialized Views)
+
 ## Tombstones
+
 COW
 https://en.wikipedia.org/wiki/Tombstone_(data_store)
 
+Cassandra stores tombstones in the index until the tombstone limit reaches 100K cells. After exceeding the tombstone limit, the query that uses the indexed value will fail.
+- TTL
+- Не використовувати як чергу.
+
+## Альтернативи
+- Amazon DynamoDB.
+- ScyllaDB, написана на C++.
+
 ## More to read
+
 https://www.baeldung.com/cassandra-keys
 Документація - https://cassandra.apache.org/doc/latest/index.html
 Курси - https://www.datastax.com/dev/academy
