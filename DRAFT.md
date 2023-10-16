@@ -123,4 +123,3 @@ https://www.baeldung.com/cassandra-keys
 Документація - https://cassandra.apache.org/doc/latest/index.html
 Курси - https://www.datastax.com/dev/academy
 https://hub.docker.com/r/bitnami/cassandra/
-

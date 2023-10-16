@@ -3,10 +3,13 @@ CREATE TABLE IF NOT EXISTS hr.departments (
   company_id uuid,
   department_id uuid,
   department_name text,
-  PRIMARY KEY ((company_id), department_id) -- Partition Key and Clustering Key
+  PRIMARY KEY ((company_id, department_id)) -- Composite Partition Key
 );
 
 CREATE INDEX idx_department_name ON hr.departments (department_name);
+
+CREATE CUSTOM INDEX ON hr.employees (name) USING 'org.apache.cassandra.index.sasi.SASIIndex'
+WITH OPTIONS = {'case_sensitive': 'false', 'mode': 'CONTAINS'};
 
 CREATE MATERIALIZED VIEW hr.departments_by_name AS
 SELECT * FROM hr.departments
@@ -23,21 +26,19 @@ CREATE TABLE IF NOT EXISTS hr.departments_by_name (
 WITH CLUSTERING ORDER BY (department_name ASC); -- ASC - сортування по замовчування
 
 CREATE TABLE IF NOT EXISTS hr.employees (
-    company_id uuid,
+    department_id uuid,
+    department_name text static,
     employee_id timeuuid,
     card_number bigint, -- табельний номер
-    first_name text,
-    last_name text,
+    name text,
     photo blob,
-    home_address text,
-    hired_at timestamp,
+    salary decimal,
+    hired_at date,
+    vacation duration,
+    tags set<text>, -- кортеж
+    duties map<text, text>, -- карта
 
-    department_id uuid,
-
-    created_at timestamp,
-    updated_at timestamp,
-
-    PRIMARY KEY ((company_id), employee_id)
+    PRIMARY KEY ((department_id), employee_id)
 );
 
 CREATE TABLE IF NOT EXISTS hr.employees_by_name (
